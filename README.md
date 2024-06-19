@@ -1,4 +1,4 @@
-# Capture the Flag (CTF) Write-ups
+# capture-the-flag (CTF) Write-ups
 
 This repository contains my write-ups for various CTF challenges I've completed, including those from OverTheWire and PicoCTF.
 
