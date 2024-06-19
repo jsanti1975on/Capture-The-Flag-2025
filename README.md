@@ -10,7 +10,7 @@ This repository contains my write-ups for various CTF challenges I've completed,
 - Decrypt an RSA-encrypted message.
 
 **Write-up:**
-- [Link to the write-up](picoCTF/mind_your_ps_and_qs/README.md)
+- [Link to the write-up](https://github.com/jsanti1975on/capture-the-flag/blob/main/picoCTF)
 
 ### OverTheWire
 
