@@ -1,7 +1,7 @@
 # PicoCTF: Mind Your Ps and Qs
 
 **Challenge Description:**
-- Description of the challenge.
+- A capture the flag challange based on RSA Encryption.
 
 **Solution:**
 
