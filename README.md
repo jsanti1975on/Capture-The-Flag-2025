@@ -14,7 +14,7 @@ This repository contains my write-ups for various CTF challenges I've completed,
 
 ### OverTheWire
 
-- [Bandit Level 0](https://github.com/jsanti1975on/capture-the-flag/tree/main/overthewire/bandit)
+- 
 
 
 ## About Me
