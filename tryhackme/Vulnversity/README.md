@@ -117,7 +117,6 @@ the command nc -lvnp, each option stands for the following:
   	`cd /home/bill`
    	`getfacl user.txt`
     	`file user.txt`
-     	user.txt: ASCI text
         `cat user.txt`
 
 ## 6. Privilege Escalation
