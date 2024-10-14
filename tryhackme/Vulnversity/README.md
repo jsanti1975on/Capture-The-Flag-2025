@@ -132,7 +132,8 @@ Enumerate the target machine for interesting files. You can start by checking th
 	`/usr/bin/pkexec`
 
 ## Step 6.2: Exploit /bin/systemctl for Privilege Escalation
-	This step I typed each line seperate
+	This step I typed `TF=$(mktemp).service` ==> but before I `cd ~`
+ 	Then I entered the rest of the cmd
 	You can exploit `/bin/systemctl` by creating a malicious service that sets the SUID bit on `/bin/bash`.
 ```
 TF=$(mktemp).service
