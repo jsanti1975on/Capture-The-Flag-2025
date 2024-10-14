@@ -90,6 +90,12 @@ if ext == "phtml":
 ## Step 4.2: Set up a Netcat Listener  
 	On your local machine, start a listener to catch the reverse shell:
 	`nc -lvnp 4444`  
+	 **the command nc -lvnp, each option stands for the following:**
+
+-l: Listen mode. This tells Netcat to listen for incoming connections instead of initiating a connection.
+-v: Verbose. This option makes Netcat provide more detailed output about what it’s doing.
+-n: No DNS. This prevents Netcat from performing DNS lookups on IP addresses, which can speed up the connection process.
+-p: Port. This specifies the port number on which Netcat should listen for incoming connections.
 
 ## Step 4.3: Trigger the Reverse Shell
 	After the reverse shell is uploaded to `http://<target_ip>:3333/internal/uploads/test-revshell.phtml`, visit the URL to trigger it.
