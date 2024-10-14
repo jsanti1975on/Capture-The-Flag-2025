@@ -113,6 +113,12 @@ the command nc -lvnp, each option stands for the following:
 ## Step 5.2: Explore the File System
 	Enumerate the target machine for interesting files. You can start by checking the home directories:
 	`ls /home/`
+ 	`ls -al`
+  	`cd /home/bill`
+   	`getfacl user.txt`
+    	`file user.txt`
+     	user.txt: ASCI text
+        `cat user.txt`
 
 ## 6. Privilege Escalation
 	After gaining access, the next goal is to escalate privileges to root.
