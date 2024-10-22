@@ -34,7 +34,7 @@ nmap -sC -sV -oN nmap_scan.txt <target_ip>
 
 ### 1. Exploitation of BlogEngine 3.3.6
 - **Upload Directory**: The vulnerable BlogEngine version allowed us to upload an ASPX file into the `App_Data/files` directory.
-- **File Used**: We uploaded a file named `PostView.ascx` containing a reverse shell payload.
+- **File Used**: We uploaded a file named `PostView.ascx` containing a reverse shell payload. ***Correct extention found TCM's walk-through***
 
 ### 2. Triggering the Reverse Shell
 - **Path Traversal**: To execute the uploaded file, we navigated to the following URL:
