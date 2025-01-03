@@ -57,3 +57,4 @@ eventvalidation = soup.find("input", {"id": "__EVENTVALIDATION"})['value']
 ---
 
 ## 5. Reading the Password Wordlist
+- Will write the script on YouTube
