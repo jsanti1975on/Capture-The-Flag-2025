@@ -44,3 +44,84 @@
 ---
 
 This process ensures a robust and reliable foundation for automating further tasks like credential testing or advanced interaction with the target system.
+
+## login_script.py
+
+```
+#!/usr/bin/env python3
+
+import requests
+from bs4 import BeautifulSoup
+import logging
+import os
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+
+# Target URL (login page) %2f is the url-encoded representation of the forwared slash
+url = "http://10.10.51.155/Account/login.aspx?ReturnURL=%2fadmin" 
+
+# Create a session to persist cookies
+session = requests.Session()
+
+# Send a GET request to fetch the login page
+logging.info("Fetching the login page...")
+response = session.get(url)
+
+# Parse the page content using BeautifulSoup 
+soup = BeautifulSoup(response.content, 'html.parser')
+
+# Extract the hidden input fields (__VIEWSTATE, __EVENTVALIDATION) => below we set viewstate and eventvalidation
+viewstate = soup.find("input", {"id": "__EVENTVALIDATION"})
+eventvalidation = soup.find("input", {"id": "__EVENTVALIDATION"})
+
+if viewstate and eventvalidation:
+		viewstate = viewstate['value']
+		eventvalidation = eventvalidation['value']
+else:
+	logging.error("Hidden fields not found. Exiting...")
+	exit()
+
+# Log the extracted values
+logging.info(f"__VIEWSTATE: {viewstate}")
+logging.info(f"__EVENTVALIDATION: {eventvalidation}")
+
+# Dynamically detect form fields
+username_field = soup.find("input", {"name": lambda x: "UserName" in x})
+password_field = soup.find("input", {"name": lambda x: "Password" in x})
+login_button_field = soup.find("input", {"name": lambda x: "LoginButton" in x})
+
+if not username_field or not password_field or not login_button_field:
+	logging.error("Required form fields not found. Exiting...")
+	exit()
+
+# Credential management (replace 'admin' and 'password' with secure inputs or environment variables)
+username = os.getenv('USERNAME', 'admin') 		# Default to 'admin'
+password = os.getenv('PASSWORD', 'password') 	# Default to 'password'
+
+# Prepare POST data
+payload = {
+	"__VIEWSTATE": viewstate,
+	"__EVENTVALIDATION": eventvalidation,
+	username_field['name']: username,
+	password_field['name']: password,
+	login_button_field['name']: login_button_field.get('value', 'Log in')
+}
+
+# Send a POST request with the form data
+logging.info("Attempting to log in...")
+login_response = session.post(url, data=payload)
+
+# Check if login was successful by analyzing the response 
+if "Invalid login" in login_response.text:
+	logging.info("Login failed. Check credential or form structure.")
+else:
+	logging.info("Login successful!")
+
+# Print the response content for debugging (optional)
+# print(login_response.text)
+
+```
+
+
+
