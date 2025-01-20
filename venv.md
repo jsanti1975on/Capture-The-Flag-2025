@@ -1,7 +1,7 @@
 # Commands
 
 ## Working in a virtual environment
-
--`which python`
-- `source venv/bin/activate`
-- 
+```bash
+`which python`
+ `source venv/bin/activate`
+```  
