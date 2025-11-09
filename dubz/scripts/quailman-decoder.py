@@ -1,5 +1,5 @@
 #!/bin/env python3
-
+# Used on Kali Linux 2025.3
 data = """
 60 61 60 60 61 60 60 61 40 60 60 61 60 60 61 61 61 40 60 61 61 60 61 61 60 61 40
 60 60 61 60 60 60 60 60 40 60 61 61 60 60 60 60 61 40 60 60 61 60 60 60 60 60 40
@@ -39,6 +39,7 @@ if current_byte:
 
 message = ''.join(decoded_chars)
 print(message)
+
 
 
 
